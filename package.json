@@ -3,7 +3,7 @@
   "displayName": "CommitsAI",
   "description": "Automate your commit messages using conventional commits structure",
   "publisher": "markzhdan",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "icon": "/src/assets/pen_icon.ico",
   "repository": {
     "type": "git",
