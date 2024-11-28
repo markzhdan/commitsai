@@ -4,6 +4,7 @@
   "description": "Automate your commit messages using conventional commits structure",
   "publisher": "markzhdan",
   "version": "0.0.1",
+  "icon": "/src/assets/pen_icon.ico",
   "repository": {
     "type": "git",
     "url": "https://github.com/markzhdan/commitsai.git"
