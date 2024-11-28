@@ -1,7 +1,8 @@
 {
   "name": "commitsai",
   "displayName": "CommitsAI",
-  "description": "",
+  "description": "Automate your commit messages using conventional commits structure",
+  "publisher": "markzhdan",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.95.0"
@@ -9,15 +10,70 @@
   "categories": [
     "Other"
   ],
+  "enabledApiProposals": [
+    "contribSourceControlTitleMenu"
+  ],
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "menus": {
+      "scm/title": [
+        {
+          "command": "commitsai.generateCommitMessage",
+          "group": "navigation",
+          "when": "!commitsai.isLoading"
+        },
+        {
+          "command": "commitsai.generateCommitMessageLoading",
+          "group": "navigation",
+          "when": "commitsai.isLoading"
+        }
+      ]
+    },
     "commands": [
       {
-        "command": "commitsai.helloWorld",
-        "title": "Hello World"
+        "command": "commitsai.generateCommitMessage",
+        "title": "Generate Commit Message",
+        "category": "CommitsAI",
+        "icon": {
+          "light": "src/assets/pen.svg",
+          "dark": "src/assets/pen.svg"
+        }
+      },
+      {
+        "command": "commitsai.generateCommitMessageLoading",
+        "title": "Generating Commit Message...",
+        "category": "CommitsAI",
+        "icon": {
+          "light": "src/assets/spinner.gif",
+          "dark": "src/assets/spinner.gif"
+        }
       }
-    ]
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "CommitsAI",
+      "properties": {
+        "commitsai.gemini_api_key": {
+          "order": 1,
+          "type": "string",
+          "default": "null",
+          "minLength": "1",
+          "description": "Your Google Gemini API key. See how to get one in README docs and store here safely"
+        },
+        "commitsai.message_size": {
+          "order": 2,
+          "type": "string",
+          "enum": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "default": "small",
+          "description": "Commit message size and style as in docs"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
@@ -28,14 +84,18 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.95.0",
     "@types/mocha": "^10.0.9",
     "@types/node": "20.x",
+    "@types/vscode": "^1.95.0",
     "@typescript-eslint/eslint-plugin": "^8.10.0",
     "@typescript-eslint/parser": "^8.7.0",
-    "eslint": "^9.13.0",
-    "typescript": "^5.6.3",
     "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.4.1"
+    "@vscode/test-electron": "^2.4.1",
+    "eslint": "^9.13.0",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@langchain/core": "^0.3.19",
+    "@langchain/google-genai": "^0.1.4"
   }
 }
