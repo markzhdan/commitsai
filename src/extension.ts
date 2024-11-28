@@ -32,8 +32,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         const cfg = vscode.workspace.getConfiguration("commitsai");
         const gemini_api_key = (cfg.get("gemini_api_key") as string) || "";
-        const message_size = cfg.get("message_size") || "small";
-        console.log(message_size);
+        //const message_size = cfg.get("message_size") || "small";
 
         let stagedDiff = "";
         let generatedCommitMessage = "";
